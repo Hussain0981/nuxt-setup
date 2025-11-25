@@ -1,47 +1,56 @@
 <script setup lang="ts">
-const navigation = ref([
-  { name: 'Home', path: '/' },
-  { name: 'About Us', path: '/about-us' },
-  { name: 'Services', path: '/services' },
-  { name: 'Projects', path: '/projects' },
-  { name: 'Contact Us', path: '/contact-us' },
-])
+import type { NavigationMenuItem } from '@nuxt/ui'
 
 const route = useRoute()
 
-// function to check active link
-function isActive(path: string) {
-  return route.path === path
-};
+const items = computed<NavigationMenuItem[]>(() => [{
+  label: 'Home',
+  to: '/',
+  active: route.path.startsWith('/'),
+}, {
+  label: 'About Us',
+  to: '/about-us',
+  active: route.path.startsWith('/about-us'),
+}, {
+  label: 'Services  ',
+  to: '/services',
+  active: route.path.startsWith('/services'),
+}, {
+  label: 'Skills',
+  to: '/skills',
+}])
 </script>
 
 <template>
   <UHeader>
-    <!-- Left Logo -->
-    <template #left>
-      <NuxtLink to="/">
-        <h1 class="text-xl font-medium text-gray-600 hover:text-black transition-colors">
-          WebApps <span class="text-orange-500 hover:text-orange-700">Solutions</span>
-        </h1>
-      </NuxtLink>
+    <template #title>
+      <div class="text-gray-600 hover:text-black transition-clr dark:text-white/60 dark:hover:text-white">
+        WebApps
+        <span class="text-blue-500 hover:text-blue-700 transition-clr">Solutions </span>
+      </div>
     </template>
 
-    <!-- Right Navigation -->
+    <UNavigationMenu :items="items" />
+
     <template #right>
-      <nav class="flex items-center gap-x-3">
-        <NuxtLink
-          v-for="(nav, index) in navigation"
-          :key="index"
-          :to="nav.path"
-          class="p-2 transition-colors duration-300" :class="[
-            route.path === nav.path
-              ? 'text-black border-b border-b-black font-medium'
-              : 'text-gray-600 hover:text-black',
-          ]"
-        >
-          {{ nav.name }}
-        </NuxtLink>
-      </nav>
+      <UTooltip text="Change Mode">
+        <UColorModeButton />
+      </UTooltip>
+
+      <UTooltip text="Open on GitHub">
+        <UButton
+          color="neutral"
+          variant="ghost"
+          to="https://github.com/Hussain0981"
+          target="_blank"
+          icon="i-simple-icons-github"
+          aria-label="GitHub"
+        />
+      </UTooltip>
+    </template>
+
+    <template #body>
+      <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
     </template>
   </UHeader>
 </template>
