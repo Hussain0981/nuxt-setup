@@ -17,4 +17,12 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  icon: {
+    customCollections: [
+      {
+        prefix: 'my-icon',
+        dir: '~/assets/my-icons',
+      },
+    ],
+  },
 })
