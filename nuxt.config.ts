@@ -8,6 +8,8 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/eslint',
     '@nuxt/devtools',
+    '@nuxt/fonts',
+    '@nuxt/icon',
   ],
   css: ['~~/app/assets/css/tailwind.css'],
   vite: {

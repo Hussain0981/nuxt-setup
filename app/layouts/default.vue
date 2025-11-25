@@ -4,6 +4,7 @@
 
 <template>
   <div>
+    <NavigationNavBar />
     <slot />
   </div>
 </template>
